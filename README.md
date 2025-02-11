@@ -9,7 +9,7 @@ Run the following commands in the root of the project directory:
 ```bash
 # if using Docker Desktop on Linux, run `docker context use default` first
 
-# install composer dependencies using laravel sail
+# install composer dependencies using temporary docker container
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
@@ -23,15 +23,42 @@ docker compose up -d
 # check running containers
 docker ps # several containers here are unused, and are only part of the default Sail installation
 
+# open terminal inside mysql container
+docker exec -it product-management-system-mysql-1 mysql -u root -p
+
+# if prompted for a password, enter password 'password' (without quotes)
+# create mysql user
+create user 'root'@'172.19.0.7' identified by 'password';
+
+# grant all permissions to root user
+grant all on *.* to 'root'@'172.19.0.7';
+grant all privileges on *.* to 'root'@'172.19.0.7' with grant option;
+
+# create project database
+create database product_management_system character set utf8mb4 collate utf8mb4_unicode_ci;
+exit;
+
 # open terminal inside app container
 docker exec -ti product-management-system-laravel.test-1 bash
 
-# install npm dependencies
+# install dependencies
 npm install
+
+# set up .env variables
+cp .env.example .env
+
+# generate encryption key
+php artisan key:generate
+
+# precompile configs for performance
+php artisan optimize
+
+# run database migrations
+php artisan migrate --seed
 
 # start development server
 npm run dev
 
 # view application
-http://localhost:5173/
+http://localhost/
 ```
