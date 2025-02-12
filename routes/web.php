@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Users\UserController;
@@ -17,9 +17,8 @@ Route::group([
     'prefix' => 'auth',
     'as' => 'auth.',
 ], function () {
-    // TODO: Change AuthController to AuthenticatedSessionController (follow Laravel conventions)
-    Route::get('/login', fn () => Inertia::render('Auth/Login'));
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/login', [AuthenticatedSessionController::class, 'create']);
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
     Route::get('/register', [RegisteredUserController::class, 'create']);
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 });
@@ -29,9 +28,9 @@ Route::group([
     'as' => 'auth.',
     'middleware' => ['auth'],
 ], function () {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
-    Route::post('/getUser', [AuthController::class, 'getUser'])->name('getUser');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
+    Route::post('/refresh', [AuthenticatedSessionController::class, 'refresh'])->name('refresh');
+    Route::post('/getUser', [AuthenticatedSessionController::class, 'getUser'])->name('getUser');
 });
 
 Route::group([

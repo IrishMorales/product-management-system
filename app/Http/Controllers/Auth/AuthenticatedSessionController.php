@@ -3,18 +3,28 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
-class AuthController extends Controller
+class AuthenticatedSessionController extends Controller
 {
     private const COOKIE_EXPIRY = 60; # in minutes
 
     /**
+     * Display the login view.
+     */
+    public function create(): Response
+    {
+        return Inertia::render('Auth/Login');
+    }
+
+    /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function store(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
         $token = auth()->attempt($credentials);
@@ -29,25 +39,13 @@ class AuthController extends Controller
         // To meet that requirement, I initially wrote `return $this->respondWithToken($token)` (returns a JSON response with the JWT token value)
         // However, Laravel Inertia throws: "All Inertia requests must receive a valid Inertia response, however a plain JSON response was received."
         // so I've changed this line to return an Inertia response instead with the JWT token value inside the cookie (I hope that still counts as returning the token haha)
-        return redirect(route('products.index'))->withCookie($this->createCookie($token));
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getUser()
-    {
-        return response()->json(auth()->user());
+        return redirect()->intended(route('products.index', absolute: false))->withCookie($this->createCookie($token));
     }
 
     /**
      * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function logout()
+    public function destroy()
     {
         # NOTE: this line is a slight duplicate of auth()->logout() since jwt-auth invalidates the token upon logout
         # adding the line here for clarity only (to show that the token needs to be invalidated)
@@ -55,6 +53,7 @@ class AuthController extends Controller
 
         auth()->logout();
 
+        # TODO: Change to redirect to default route
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -92,6 +91,9 @@ class AuthController extends Controller
         ])->withCookie($cookie);
     }
 
+    /**
+     * Helper function to create secure HttpOnly cookie with stored token value
+     */
     private function createCookie($token)
     {
         return cookie(
