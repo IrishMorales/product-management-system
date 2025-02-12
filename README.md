@@ -74,3 +74,11 @@ docker exec -ti product-management-system-laravel.test-1 bash
 # seed mock data
 php artisan db:seed --class=MockDataSeeder
 ```
+
+# Authentication
+
+This web app uses JWT tokens for authentication. Tokens are generated and signed with `jwt-auth`, then stored in encrypted HttpOnly cookies (with the Secure flag enabled) to prevent exposing JWT tokens through XSS injection.
+
+# Security
+
+Cookies are encrypted with Laravel's global `EncryptCookies` middleware. All routes have CSRF protection using Laravel's global `VerifyCsrfToken` middleware.
