@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -23,15 +26,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Products/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateProduct $request)
     {
-        //
+        DB::transaction(fn () => Product::create($request->validated()));
+        return redirect(route('products.index'));
     }
 
     /**
