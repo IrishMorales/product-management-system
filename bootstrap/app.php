@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             HandleInertiaRequests::class,
             EncryptCookies::class,
-            // TODO VerifyCsrfToken::class
+            VerifyCsrfToken::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
