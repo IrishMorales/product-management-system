@@ -20,6 +20,7 @@ class AuthController extends Controller
         $token = auth()->attempt($credentials);
 
         if (!$token) {
+            // TODO: Chaange to Inertia response instead of JSON response
             return response()->json(['error' => 'Invalid user credentials.'], 401);
         }
 
