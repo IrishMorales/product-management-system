@@ -3,9 +3,11 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+# TODO: Refactor into multiple route files
 # TODO: Redirect / to /products if authenticated, else redirect to login
 Route::get('/', function () {
     return Inertia::render('Auth/Login');
@@ -30,6 +32,14 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('/getUser', [AuthController::class, 'getUser'])->name('getUser');
+});
+
+Route::group([
+    'prefix' => 'users',
+    'as' => 'users.',
+    'middleware' => ['auth'],
+], function () {
+    Route::get('/me', [UserController::class, 'show'])->name('show');
 });
 
 Route::group([

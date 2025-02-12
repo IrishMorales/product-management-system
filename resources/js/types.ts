@@ -5,3 +5,9 @@ export type Product = {
   stock: number;
   price: number;
 }
+
+export type User = {
+  id?: number;
+  name: string;
+  email: string;
+}
