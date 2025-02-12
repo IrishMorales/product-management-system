@@ -63,6 +63,7 @@ php artisan migrate --seed
 npm run dev
 
 # view application
+# log in with test user (email: test@example.com, password: password)
 http://localhost/
 ```
 
