@@ -49,6 +49,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Log the user out (Invalidate the token).
      */
+    # NOTE: This function isn't currently used, but should be used to log out if log out functionality were implemented
     public function destroy()
     {
         auth()->logout();

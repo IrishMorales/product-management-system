@@ -29,7 +29,6 @@ Route::group([
 ], function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthenticatedSessionController::class, 'refresh'])->name('refresh');
-    Route::post('/getUser', [AuthenticatedSessionController::class, 'getUser'])->name('getUser');
 });
 
 Route::group([
