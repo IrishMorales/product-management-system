@@ -38,7 +38,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // TODO: Change login and redirect routes to variable
         return redirect(route('products.index'));
     }
 }

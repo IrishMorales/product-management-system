@@ -13,7 +13,6 @@ class CreateProduct extends FormRequest
      */
     public function rules(): array
     {
-        // TODO: Flash validation rules on error
         return [
             'name' => 'required|max:255',
             'description' => 'required|max:255',

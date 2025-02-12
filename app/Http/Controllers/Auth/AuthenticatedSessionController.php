@@ -65,7 +65,7 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    # TODO: Use to periodically refresh token via cookie
+    # NOTE: This function isn't currently used, but should be used to periodically refresh the user's token
     public function refresh()
     {
         # NOTE: this line is a slight duplicate of auth()->refresh() since jwt-auth invalidates the token upon refresh
