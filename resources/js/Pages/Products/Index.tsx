@@ -49,7 +49,7 @@ export default function ProductIndex({ products }: ProductIndexProps) {
                 <Table.ColumnHeader>Product</Table.ColumnHeader>
                 <Table.ColumnHeader>Category</Table.ColumnHeader>
                 <Table.ColumnHeader>Stock</Table.ColumnHeader>
-                <Table.ColumnHeader>Price</Table.ColumnHeader>
+                <Table.ColumnHeader>Price (PHP)</Table.ColumnHeader>
                 <Table.ColumnHeader textAlign="end">Actions</Table.ColumnHeader>
               </Table.Row>
             </Table.Header>

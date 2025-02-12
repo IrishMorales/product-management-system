@@ -44,7 +44,7 @@ export default function ProductShow({ product }: ProductShowProps) {
                 <DataList.ItemValue>{product.stock}</DataList.ItemValue>
               </DataList.Item>
               <DataList.Item key={product.price}>
-                <DataList.ItemLabel>Price</DataList.ItemLabel>
+                <DataList.ItemLabel>Price (PHP)</DataList.ItemLabel>
                 <DataList.ItemValue>{product.price}</DataList.ItemValue>
               </DataList.Item>
             </DataList.Root>
