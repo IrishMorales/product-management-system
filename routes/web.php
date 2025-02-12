@@ -27,10 +27,9 @@ Route::group([
     'as' => 'auth.',
     'middleware' => ['auth'],
 ], function () {
-    // TODO: Fix slashes
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
-    Route::post('getUser', [AuthController::class, 'getUser'])->name('getUser');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
+    Route::post('/getUser', [AuthController::class, 'getUser'])->name('getUser');
 });
 
 Route::group([
