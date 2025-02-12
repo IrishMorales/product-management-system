@@ -82,3 +82,10 @@ This web app uses JWT tokens for authentication. Tokens are generated and signed
 # Security
 
 Cookies are encrypted with Laravel's global `EncryptCookies` middleware. All routes have CSRF protection using Laravel's `VerifyCsrfToken` middleware and XSS protection using `protonemedia/laravel-xss-protection` middleware.
+
+# Form Validation
+
+All forms have both server-side and client-side validation. All inputs are processed with the following global middleware:
+- `TrimStrings` - trim excess whitespace
+- `ConvertEmptyStringsToNull` - converts empty strings to null
+- `XssCleanInput` - terminates requests when malicious input is submitted via XSS injection
