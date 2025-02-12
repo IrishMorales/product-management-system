@@ -30,8 +30,9 @@ class AuthenticatedSessionController extends Controller
         $token = auth()->attempt($credentials);
 
         if (!$token) {
-            // TODO: Chaange to Inertia response instead of JSON response
-            return response()->json(['error' => 'Invalid user credentials.'], 401);
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors(['password' => 'Invalid user credentials.']);
         }
 
         // IMPORTANT: 
@@ -53,8 +54,7 @@ class AuthenticatedSessionController extends Controller
 
         auth()->logout();
 
-        # TODO: Change to redirect to default route
-        return response()->json(['message' => 'Successfully logged out']);
+        return redirect('/');
     }
 
     /**
