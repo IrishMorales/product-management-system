@@ -7,7 +7,8 @@ import {
   Box,
   Flex,
   Button,
-  IconButton
+  IconButton,
+  Group
 } from '@chakra-ui/react';
 import {
   PaginationItems,
@@ -17,7 +18,7 @@ import {
 } from "@/Components/Pagination"
 import { Head, router } from '@inertiajs/react'
 import { useEffect } from 'react'
-import { FaPencil } from "react-icons/fa6";
+import { FaPencil, FaX } from "react-icons/fa6";
 
 interface ProductIndexProps {
   products: {
@@ -60,9 +61,14 @@ export default function ProductIndex({ products }: ProductIndexProps) {
                   <Table.Cell>{product.stock}</Table.Cell>
                   <Table.Cell>{product.price}</Table.Cell>
                   <Table.Cell textAlign="end">
-                    <IconButton size={"sm"} variant={"subtle"} aria-label="Edit" onClick={() => router.visit(route('products.edit', {product: product.id}))}>
-                      <FaPencil/>
-                    </IconButton>
+                    <Group>
+                      <IconButton size={"sm"} variant={"subtle"} aria-label="Edit" onClick={() => router.visit(route('products.edit', { product: product.id }))}>
+                        <FaPencil />
+                      </IconButton>
+                      <IconButton size={"sm"} colorPalette={"red"} aria-label="Delete" onClick={() => router.delete(route('products.destroy', { product: product.id }))}>
+                        <FaX />
+                      </IconButton>
+                    </Group>
                   </Table.Cell>
                 </Table.Row>
               ))}
