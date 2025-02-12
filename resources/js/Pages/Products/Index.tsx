@@ -18,7 +18,7 @@ import {
 } from "@/Components/Pagination"
 import { Head, router } from '@inertiajs/react'
 import { useEffect } from 'react'
-import { FaPencil, FaX } from "react-icons/fa6";
+import { FaMagnifyingGlass, FaPencil, FaX } from "react-icons/fa6";
 
 interface ProductIndexProps {
   products: {
@@ -63,6 +63,9 @@ export default function ProductIndex({ products }: ProductIndexProps) {
                     <Table.Cell>{product.price}</Table.Cell>
                     <Table.Cell textAlign="end">
                       <Group>
+                        <IconButton size={"sm"} variant={"subtle"} aria-label="View" onClick={() => router.visit(route('products.show', { product: product.id }))}>
+                          <FaMagnifyingGlass />
+                        </IconButton>
                         <IconButton size={"sm"} variant={"subtle"} aria-label="Edit" onClick={() => router.visit(route('products.edit', { product: product.id }))}>
                           <FaPencil />
                         </IconButton>
