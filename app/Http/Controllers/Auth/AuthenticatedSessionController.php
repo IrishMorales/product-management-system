@@ -24,7 +24,7 @@ class AuthenticatedSessionController extends Controller
      * Get a JWT via given credentials.
      *
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
         $token = auth()->attempt($credentials);
