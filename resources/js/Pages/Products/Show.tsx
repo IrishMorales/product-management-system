@@ -1,7 +1,12 @@
-import { Head } from '@inertiajs/react'
+import { Head, router } from '@inertiajs/react'
 import { Product } from '@/types';
 import { useEffect } from 'react';
-import { Box, Card, Heading, AbsoluteCenter, DataList } from '@chakra-ui/react';
+import { Box, Card, Heading, AbsoluteCenter, DataList, Link } from '@chakra-ui/react';
+import {
+  BreadcrumbCurrentLink,
+  BreadcrumbLink,
+  BreadcrumbRoot,
+} from "@/Components/Breadcrumbs"
 
 interface ProductShowProps {
   product: Product
@@ -18,6 +23,10 @@ export default function ProductShow({ product }: ProductShowProps) {
       <AbsoluteCenter axis="horizontal">
         <Card.Root size="lg" minW="2xl">
           <Card.Header>
+            <BreadcrumbRoot>
+              <BreadcrumbLink onClick={() => router.visit(route('products.index'))}>All Products</BreadcrumbLink>
+              <BreadcrumbCurrentLink>{product.name}</BreadcrumbCurrentLink>
+            </BreadcrumbRoot>
             <Heading size="2xl">{product.name}</Heading>
           </Card.Header>
           <Card.Body>
