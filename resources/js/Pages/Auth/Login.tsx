@@ -10,9 +10,6 @@ export default function Login({}) {
   async function submit(e) {
     e.preventDefault();
     post('/login', {
-      onSuccess: () => {
-        router.visit('/products'); // TODO: Change to route name, avoid hardcoding
-      },
       onFinish: () => reset("password") // clear sensitive data
     });
   }
