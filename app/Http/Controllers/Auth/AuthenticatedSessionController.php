@@ -48,11 +48,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy()
     {
+        auth()->logout();
+        
         # NOTE: this line is a slight duplicate of auth()->logout() since jwt-auth invalidates the token upon logout
         # adding the line here for clarity only (to show that the token needs to be invalidated)
         auth()->invalidate();
-
-        auth()->logout();
 
         return redirect('/');
     }
