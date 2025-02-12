@@ -50,6 +50,9 @@ cp .env.example .env
 # generate encryption key
 php artisan key:generate
 
+# generate key to sign JWT
+php artisan jwt:secret
+
 # precompile configs for performance
 php artisan optimize
 

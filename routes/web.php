@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -9,15 +10,23 @@ Route::get('/', function () {
     return Inertia::render('Auth/Login');
 });
 
-# TODO
-Route::get('/register', function () {
-    return Inertia::render('Auth/Register');
+Route::get('/login', fn () => Inertia::render('Auth/Login'));
+Route::post('login', [AuthController::class, 'login'])->name('login');
+
+Route::get('/register', fn () => Inertia::render('Auth/Register'));
+
+Route::group([
+    'middleware' => ['auth'],
+], function () {
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
+    Route::post('getUser', [AuthController::class, 'getUser'])->name('getUser');
 });
 
 Route::group([
     'prefix' => 'products',
     'as' => 'products.',
-    // 'middleware' => ['auth'], TODO
+    'middleware' => ['auth']
 ], function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     
