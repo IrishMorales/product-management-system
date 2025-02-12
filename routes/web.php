@@ -5,17 +5,23 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-# TODO: Redirect / to /products if authenticated, else redirect to /login
+# TODO: Redirect / to /products if authenticated, else redirect to login
 Route::get('/', function () {
     return Inertia::render('Auth/Login');
 });
 
-Route::get('/login', fn () => Inertia::render('Auth/Login'));
-Route::post('login', [AuthController::class, 'login'])->name('login');
-
-Route::get('/register', fn () => Inertia::render('Auth/Register'));
+Route::group([
+    'prefix' => 'auth',
+    'as' => 'auth.',
+], function () {
+    Route::get('/login', fn () => Inertia::render('Auth/Login'));
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', fn () => Inertia::render('Auth/Register'));
+});
 
 Route::group([
+    'prefix' => 'auth',
+    'as' => 'auth.',
     'middleware' => ['auth'],
 ], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
