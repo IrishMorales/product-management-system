@@ -13,3 +13,11 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return Inertia::render('Auth/Register');
 });
+
+Route::group([
+    'prefix' => 'products',
+    'as' => 'products.',
+    // 'middleware' => ['auth'], TODO
+], function () {
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+});
