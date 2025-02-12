@@ -27,6 +27,8 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
+
+        # Configured default auth guard in auth.php for web is jwt
         $token = auth()->attempt($credentials);
 
         if (!$token) {
