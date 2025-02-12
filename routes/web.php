@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,9 +15,11 @@ Route::group([
     'prefix' => 'auth',
     'as' => 'auth.',
 ], function () {
+    // TODO: Change AuthController to AuthenticatedSessionController (follow Laravel conventions)
     Route::get('/login', fn () => Inertia::render('Auth/Login'));
-    Route::post('login', [AuthController::class, 'login'])->name('login');
-    Route::get('/register', fn () => Inertia::render('Auth/Register'));
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [RegisteredUserController::class, 'create']);
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 });
 
 Route::group([
@@ -24,6 +27,7 @@ Route::group([
     'as' => 'auth.',
     'middleware' => ['auth'],
 ], function () {
+    // TODO: Fix slashes
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('getUser', [AuthController::class, 'getUser'])->name('getUser');
