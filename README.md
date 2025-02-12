@@ -62,3 +62,12 @@ npm run dev
 # view application
 http://localhost/
 ```
+
+# Generating sample data
+```bash
+# open terminal inside app container
+docker exec -ti product-management-system-laravel.test-1 bash
+
+# seed mock data
+php artisan db:seed --class=MockDataSeeder
+```
