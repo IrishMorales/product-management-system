@@ -90,7 +90,7 @@ Cookies are encrypted with Laravel's global `EncryptCookies` middleware. All rou
 
 ### Form Validation
 
-All forms have server-side validation and partial client-side validation (only used to check for min). All inputs are processed with the following global middleware:
+All forms have server-side validation. All inputs are processed with the following global middleware:
 - `TrimStrings` - trim excess whitespace
 - `ConvertEmptyStringsToNull` - converts empty strings to null
 - `XssCleanInput` - terminates requests when malicious input is submitted via XSS injection
