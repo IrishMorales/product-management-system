@@ -5,21 +5,15 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 # TODO: Refactor into multiple route files
-# TODO: Redirect / to /products if authenticated, else redirect to login
-Route::get('/', function () {
-    return Inertia::render('Auth/Login');
-});
-
 Route::group([
     'prefix' => 'auth',
     'as' => 'auth.',
 ], function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login.show');
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
-    
+
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register.show');
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 });
