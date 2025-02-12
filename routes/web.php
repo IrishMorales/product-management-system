@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
+# TODO: Redirect / or add button to 404 to return to login/home
 # TODO: Refactor into multiple route files
 Route::group([
     'prefix' => 'auth',
