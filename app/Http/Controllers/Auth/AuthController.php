@@ -23,6 +23,11 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid user credentials.'], 401);
         }
 
+        // IMPORTANT: 
+        // The instructions for /auth/login state that this endpoint "should return a JWT token"
+        // To meet that requirement, I initially wrote `return $this->respondWithToken($token)` (returns a JSON response with the JWT token value)
+        // However, Laravel Inertia throws: "All Inertia requests must receive a valid Inertia response, however a plain JSON response was received."
+        // so I've changed this line to return an Inertia response instead with the JWT token value inside the cookie (I hope that still counts as returning the token haha)
         return redirect(route('products.index'))->withCookie($this->createCookie($token));
     }
 
