@@ -32,7 +32,10 @@ class AuthenticatedSessionController extends Controller
         if (!$token) {
             return back()
                 ->withInput($request->only('email'))
-                ->withErrors(['password' => 'Invalid user credentials.']);
+                ->withErrors([
+                    'email' => 'Invalid user credentials.',
+                    'password' => 'Invalid user credentials.'
+                ]);
         }
 
         // IMPORTANT: 
