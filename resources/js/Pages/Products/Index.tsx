@@ -1,13 +1,6 @@
+import { Product } from '@/types';
 import { Head } from '@inertiajs/react'
 import { useEffect } from 'react'
-
-type Product = {
-  id: number;
-  name: string;
-  description: string;
-  stock: number;
-  price: number;
-}
 
 interface ProductIndexProps {
   products: Product[];
