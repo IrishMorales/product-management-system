@@ -6,9 +6,14 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return redirect()->route('products.index');
+});
+
 Route::group([
     'prefix' => 'auth',
     'as' => 'auth.',
+    'middleware' => ['guest'],
 ], function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login.show');
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
