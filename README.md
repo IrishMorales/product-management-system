@@ -99,3 +99,4 @@ All forms have server-side validation and partial client-side validation (only u
 
 - Refresh user's JWT token periodically (currently a function is implemented for this but never used)
 - Create attribute on Product that gets a formatted copy of `price` (formatted with currency, decimal precision, etc.) 
+- Add rate limiting to login form to prevent brute force attacks
