@@ -9,7 +9,7 @@ export default function Login({}) {
 
   async function submit(e) {
     e.preventDefault();
-    post('/login', {
+    post('/auth/login', {
       onFinish: () => reset("password") // clear sensitive data
     });
   }
