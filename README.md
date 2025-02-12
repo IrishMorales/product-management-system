@@ -1,11 +1,14 @@
 # Product Management System
-[WIP] Product management system made with React, TypeScript, and Laravel
 
-# Prerequisites before first-time setup
+Product management system made with React, TypeScript, and Laravel
+
+### Prerequisites before first-time setup
 - Docker
 
-# Setting up on your local device (First-time setup)
+### Setting up on your local device (First-time setup)
+
 Run the following commands in the root of the project directory:
+
 ```bash
 # if using Docker Desktop on Linux, run `docker context use default` first
 
@@ -67,7 +70,8 @@ npm run dev
 http://localhost/
 ```
 
-# Generating sample data
+### Generating sample data
+
 ```bash
 # open terminal inside app container
 docker exec -ti product-management-system-laravel.test-1 bash
@@ -76,17 +80,22 @@ docker exec -ti product-management-system-laravel.test-1 bash
 php artisan db:seed --class=MockDataSeeder
 ```
 
-# Authentication
+### Authentication
 
 This web app uses JWT tokens for authentication. Tokens are generated and signed with `jwt-auth`, then stored in encrypted HttpOnly cookies (with the Secure flag enabled) to prevent exposing JWT tokens through XSS injection.
 
-# Security
+### Security
 
 Cookies are encrypted with Laravel's global `EncryptCookies` middleware. All routes have CSRF protection using Laravel's `VerifyCsrfToken` middleware and XSS protection using `protonemedia/laravel-xss-protection` middleware.
 
-# Form Validation
+### Form Validation
 
-All forms have both server-side and client-side validation. All inputs are processed with the following global middleware:
+All forms have server-side validation and partial client-side validation (only used to check for min). All inputs are processed with the following global middleware:
 - `TrimStrings` - trim excess whitespace
 - `ConvertEmptyStringsToNull` - converts empty strings to null
 - `XssCleanInput` - terminates requests when malicious input is submitted via XSS injection
+
+### Possible Improvements
+
+- Refresh user's JWT token periodically (currently a function is implemented for this but never used)
+- Create attribute on Product that gets a formatted copy of `price` (formatted with currency, decimal precision, etc.) 
