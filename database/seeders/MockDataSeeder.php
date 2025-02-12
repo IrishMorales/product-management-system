@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MockDataSeeder extends Seeder
@@ -13,6 +12,8 @@ class MockDataSeeder extends Seeder
      */
     public function run(): void
     {
+        // NOTE: Can be improved by generating with factory
+
         Product::create([
             'name' => 'Mock Product A',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...',
