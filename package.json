@@ -6,6 +6,7 @@
         "dev": "vite"
     },
     "devDependencies": {
+        "@geist-ui/core": "^2.3.8",
         "@inertiajs/react": "^2.0.3",
         "@types/react": "^19.0.8",
         "@types/react-dom": "^19.0.3",
