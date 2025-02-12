@@ -6,7 +6,9 @@
         "dev": "vite"
     },
     "devDependencies": {
-        "@geist-ui/core": "^2.3.8",
+        "@chakra-ui/cli": "^3.8.0",
+        "@chakra-ui/react": "^3.8.0",
+        "@emotion/react": "^11.14.0",
         "@inertiajs/react": "^2.0.3",
         "@tailwindcss/vite": "^4.0.6",
         "@types/react": "^19.0.8",
@@ -18,7 +20,10 @@
         "laravel-vite-plugin": "^1.2.0",
         "postcss": "^8.4.47",
         "react-dom": "^19.0.0",
+        "react-icons": "^5.4.0",
         "tailwindcss": "^3.4.13",
-        "vite": "^6.0.11"
+        "vite": "^6.0.11",
+        "vite-tsconfig-paths": "^5.1.4",
+        "next-themes": "^0.4.4"
     }
 }

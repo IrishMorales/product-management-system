@@ -7,12 +7,12 @@
         "strict": true,
         "isolatedModules": true,
         "target": "ESNext",
-        "esModuleInterop": true,
+        "esModuleInterop": false,
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
         "noEmit": true,
         "paths": {
-            "@/*": ["./resources/js/*"],
+            "@/*": ["./src/*", "./resources/js/*"],
             "ziggy-js": ["./vendor/tightenco/ziggy"]
         }
     },
