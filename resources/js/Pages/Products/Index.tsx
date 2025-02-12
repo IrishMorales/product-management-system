@@ -54,24 +54,30 @@ export default function ProductIndex({ products }: ProductIndexProps) {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {products.data.map((product) => (
-                <Table.Row key={product.id}>
-                  <Table.Cell>{product.name}</Table.Cell>
-                  <Table.Cell>{product.description}</Table.Cell>
-                  <Table.Cell>{product.stock}</Table.Cell>
-                  <Table.Cell>{product.price}</Table.Cell>
-                  <Table.Cell textAlign="end">
-                    <Group>
-                      <IconButton size={"sm"} variant={"subtle"} aria-label="Edit" onClick={() => router.visit(route('products.edit', { product: product.id }))}>
-                        <FaPencil />
-                      </IconButton>
-                      <IconButton size={"sm"} colorPalette={"red"} aria-label="Delete" onClick={() => router.delete(route('products.destroy', { product: product.id }))}>
-                        <FaX />
-                      </IconButton>
-                    </Group>
-                  </Table.Cell>
+              {products.data.length > 0 ? (
+                products.data.map((product) => (
+                  <Table.Row key={product.id}>
+                    <Table.Cell>{product.name}</Table.Cell>
+                    <Table.Cell>{product.description}</Table.Cell>
+                    <Table.Cell>{product.stock}</Table.Cell>
+                    <Table.Cell>{product.price}</Table.Cell>
+                    <Table.Cell textAlign="end">
+                      <Group>
+                        <IconButton size={"sm"} variant={"subtle"} aria-label="Edit" onClick={() => router.visit(route('products.edit', { product: product.id }))}>
+                          <FaPencil />
+                        </IconButton>
+                        <IconButton size={"sm"} colorPalette={"red"} aria-label="Delete" onClick={() => router.delete(route('products.destroy', { product: product.id }))}>
+                          <FaX />
+                        </IconButton>
+                      </Group>
+                    </Table.Cell>
+                  </Table.Row>
+                ))
+              ) : (
+                <Table.Row>
+                  <Table.Cell colSpan={5} textAlign="center">No products found.</Table.Cell>
                 </Table.Row>
-              ))}
+              )}
             </Table.Body>
           </Table.Root>
         </Table.ScrollArea>
