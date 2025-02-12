@@ -81,4 +81,4 @@ This web app uses JWT tokens for authentication. Tokens are generated and signed
 
 # Security
 
-Cookies are encrypted with Laravel's global `EncryptCookies` middleware. All routes have CSRF protection using Laravel's global `VerifyCsrfToken` middleware.
+Cookies are encrypted with Laravel's global `EncryptCookies` middleware. All routes have CSRF protection using Laravel's `VerifyCsrfToken` middleware and XSS protection using `protonemedia/laravel-xss-protection` middleware.

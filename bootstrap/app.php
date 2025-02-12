@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             HandleInertiaRequests::class,
             EncryptCookies::class,
-            VerifyCsrfToken::class
+            VerifyCsrfToken::class,
+            XssCleanInput::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

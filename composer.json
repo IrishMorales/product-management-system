@@ -13,6 +13,7 @@
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "protonemedia/laravel-xss-protection": "^1.7",
         "tightenco/ziggy": "^2.5",
         "tymon/jwt-auth": "^2.1"
     },
