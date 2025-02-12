@@ -5,6 +5,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
@@ -19,7 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             EncryptCookies::class,
             VerifyCsrfToken::class,
-            XssCleanInput::class
+            XssCleanInput::class,
+            TrimStrings::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
