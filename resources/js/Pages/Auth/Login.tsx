@@ -1,10 +1,12 @@
-import { Head, router, useForm } from '@inertiajs/react'
+import { Button, Card, Input, Field, Fieldset, Link, AbsoluteCenter } from '@chakra-ui/react';
+import { Head, useForm } from '@inertiajs/react'
 
-export default function Login({}) {
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+export default function Login({ }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     email: "",
     password: "",
-    remember: false
   });
 
   async function submit(e) {
@@ -17,23 +19,36 @@ export default function Login({}) {
   return (
     <div>
       <Head title="Login" />
-      <form onSubmit={submit}>
-        
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" value={data?.email} onChange={e => setData('email', e.target.value)}/> 
-          {errors.email && <div>{errors.email}</div>}
-        </div>
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" value={data?.password} onChange={e => setData('password', e.target.value)}/> 
-          {errors.password && <div>{errors.password}</div>}
-        </div>
-
-        <button type="submit" disabled={processing}>Log in</button>
-
-      </form>
+      <AbsoluteCenter axis="both">
+        <Card.Root size="lg" maxW="xl" minW="lg">
+          <form onSubmit={submit}>
+            <Card.Header>
+              <Card.Title>{appName}</Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <Fieldset.Root>
+                <Fieldset.Content>
+                  <Field.Root invalid={errors.email ? true : false}>
+                    <Field.Label htmlFor="email">Email<Field.RequiredIndicator /></Field.Label>
+                    <Input type="email" value={data?.email} onChange={e => setData('email', e.target.value)} />
+                    <Field.ErrorText>{errors.email}</Field.ErrorText>
+                  </Field.Root>
+                  <Field.Root invalid={errors.password ? true : false}>
+                    <Field.Label htmlFor="password">Password<Field.RequiredIndicator /></Field.Label>
+                    <Input type="password" value={data?.password} onChange={e => setData('password', e.target.value)} />
+                    <Field.ErrorText>{errors.password}</Field.ErrorText>
+                  </Field.Root>
+                </Fieldset.Content>
+                <hr/>
+                <Button type="submit" loading={processing} disabled={processing}>Log in</Button>
+                <Fieldset.HelperText>
+                  Don't have an account? <Link variant="underline" href={route('auth.register.show')}>Sign up instead.</Link>
+                </Fieldset.HelperText>
+              </Fieldset.Root>
+            </Card.Body>
+          </form>
+        </Card.Root>
+      </AbsoluteCenter>
     </div>
   )
 }
